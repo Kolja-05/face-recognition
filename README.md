@@ -15,10 +15,7 @@ $$g = \frac{1}{m}\sum_{i=1}^m g_i \in R^n$$
 $$x_i = g_i.g\in R^n$$
 ## 3. Setup Datamatrix
 
-$$
-X = \left(\begin{array}{c} x_1^T \\ \vdots \\ x_m^T \end{array}\right) \in \mathbb{R}^{m \times n}
-$$
-
+![](https://latex.codecogs.com/svg.image?X=\begin{pmatrix}x_1^T\\\vdots\\x_m^T\end{pmatrix}\in\mathbb{R}^{m\times&space;n})
 **4. Compute the SVD**
 
 $$X = U \Sigma V^T$$
