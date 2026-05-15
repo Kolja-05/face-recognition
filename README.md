@@ -22,7 +22,7 @@ $$D = \begin{pmatrix} ───x_1^T ───\\\ \vdots \\\ ───x_m^T ─�
 $$X = U \Sigma V^T=U \begin{pmatrix}
 \sigma_1 &             \\
          &         \ddots \\
-         &        &        \sigma_r
+         &        &        \sigma_m
 \end{pmatrix}\begin{pmatrix} ───v_1^T ───\\\ \vdots \\\ ───v_m^T ─── \end{pmatrix}$$
 
 - $U \in \mathbb{R}^{m \times m}$ — orthonormal matrix
@@ -39,7 +39,7 @@ $$y_i = V_k^T x_i \in \mathbb{R}^k$$
 
 **7. Project the query point**
 
-$$y^* = V_k^T (g^* - \bar{g}) \in \mathbb{R}^k$$
+$$y_i* = V_k^T x_i \in \mathbb{R}^k$$
 
 **8. Nearest neighbour**
 
