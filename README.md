@@ -16,7 +16,7 @@ $$x_i = g_i.g\in R^n$$
 ## 3. Setup Datamatrix
 
 $$
-X = \begin{bmatrix} x_1^T \\ \vdots \\ x_m^T \end{bmatrix} \in \mathbb{R}^{m \times n}
+X = \left(\begin{array}{c} x_1^T \\ \vdots \\ x_m^T \end{array}\right) \in \mathbb{R}^{m \times n}
 $$
 
 **4. Compute the SVD**
