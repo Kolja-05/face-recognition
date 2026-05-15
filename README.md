@@ -39,7 +39,7 @@ v_1 & \cdots & v_k \\
 | & & |
 \end{bmatrix} \in \mathbb{R}^{n \times k}$$
 
-###6. Dimensionality reduction (projection)
+### 6. Dimensionality reduction (projection)
 
 $$y_i = V_k^T x_i \in \mathbb{R}^k$$
 
