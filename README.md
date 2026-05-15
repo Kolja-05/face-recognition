@@ -15,7 +15,7 @@ $$g = \frac{1}{m}\sum_{i=1}^m g_i \in R^n$$
 $$x_i = g_i.g\in R^n$$
 ## 3. Setup Datamatrix
 
-$$D = \begin{pmatrix} ───x_1^T ───\\\ \vdots \\\ ───x_m^T ─── \end{pmatrix} \in \mathbb{R}^{m \times n}$$
+$$D = \begin{bmatrix} ───x_1^T ───\\\ \vdots \\\ ───x_m^T ─── \end{bmatrix} \in \mathbb{R}^{m \times n}$$
 
 **4. Compute the Singular-Value-Decomposition (SVD)**
 
@@ -23,7 +23,7 @@ $$X = U \Sigma V^T=U \begin{pmatrix}
 \sigma_1 &             \\
          &         \ddots \\
          &        &        \sigma_m
-\end{pmatrix}\begin{pmatrix} ───v_1^T ───\\\ \vdots \\\ ───v_m^T ─── \end{pmatrix}$$
+\end{bmatrix}\begin{bmatrix} ───v_1^T ───\\\ \vdots \\\ ───v_m^T ─── \end{bmatrix}$$
 
 - $U \in \mathbb{R}^{m \times m}$ — orthonormal matrix
 - $\Sigma \in \mathbb{R}^{m \times m}$ — diagonal matrix with $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_m \geq 0$
@@ -31,7 +31,7 @@ $$X = U \Sigma V^T=U \begin{pmatrix}
 
 **5. Select top-$k$ singular vectors**
 
-$$V_k = \begin{pmatrix} v_1 & \cdots & v_k \end{pmatrix} \in \mathbb{R}^{n \times k}$$
+$$V_k = \begin{bmatrix} v_1 & \cdots & v_k \end{bmatrix} \in \mathbb{R}^{n \times k}$$
 
 **6. Dimensionality reduction (projection)**
 
