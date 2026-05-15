@@ -3,9 +3,16 @@ import cv2
 from pathlib import Path
 from tqdm import tqdm
 
-def process_image(src_path: Path) -> int:
+def process_image(src_path: Path, dst_dir: Path) -> int:
+    """
+    process image located at path and saves it under the same name in dst_dir
+
+    Arguments
+    src_path: path to the image to process
+    dst_dir: path of the directory where the processed image should be saved
+    """
     src = Path(src_path)
-    dst = src.parent / ".." / "clean" / src.name
+    dst = dst_dir / src.name
     dst = dst.resolve()
     dst = str(dst)
 
@@ -50,11 +57,12 @@ def process_image(src_path: Path) -> int:
     return 0
 
 if __name__ == "__main__":
-    directory = Path("data/raw")
+    src_dir = Path("data/raw")
+    dst_dir = Path("data/clean")
 
     IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
 
-    paths = [p for p in directory.iterdir() 
+    paths = [p for p in src_dir.iterdir() 
         if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS
     ]
     skipped_more_faces = 0
@@ -64,7 +72,7 @@ if __name__ == "__main__":
     pbar = tqdm(paths, desc="Processing images")
 
     for path in pbar:
-        ret = process_image(path)
+        ret = process_image(path, dst_dir)
 
         if ret == 1:
             skipped_more_faces += 1
