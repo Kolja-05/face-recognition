@@ -9,7 +9,7 @@ Recognising faces in images using Python and identifying different persons
 
 Output: The index $i\in \{1, \dots, m\} of the face image $g$, that best matches $g^*$.
 
-### 1. CCompute the mean face image
+### 1. Compute the mean face image
 $$g = \frac{1}{m}\sum_{i=1}^m g_i \in R^n$$
 
 ### 2. Subtract the mean
