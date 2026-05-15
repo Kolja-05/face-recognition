@@ -20,10 +20,9 @@ $$D = \begin{pmatrix} ───x_1^T ───\\\ \vdots \\\ ───x_m^T ─�
 **4. Compute the Singular-Value-Decomposition (SVD)**
 
 $$X = U \Sigma V^T=U \begin{pmatrix}
-\sigma_1 &        &        \\
-         & \sigma_2 &        \\
-         &        & \ddots \\
-         &        &        & \sigma_r
+\sigma_1 &             \\
+         &         \ddots \\
+         &        &        \sigma_r
 \end{pmatrix}\begin{pmatrix} ───v_1^T ───\\\ \vdots \\\ ───v_m^T ─── \end{pmatrix}$$
 
 - $U \in \mathbb{R}^{m \times m}$ — orthonormal matrix
