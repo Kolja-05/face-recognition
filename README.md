@@ -9,7 +9,7 @@ Recognising faces in images using Python and identifying different persons
 
 Output: The index $i\in \{1, \dots, m\} of the face image $g$, that best matches $g^*$.
 
-## 1. Calculating Avarage face image:
+### 1. Calculating Avarage face image:
 $$g = \frac{1}{m}\sum_{i=1}^m g_i \in R^n$$
 ## 2. Subtract the mean
 $$x_i = g_i.g\in R^n$$
@@ -17,7 +17,7 @@ $$x_i = g_i.g\in R^n$$
 
 $$D = \begin{bmatrix} ───x_1^T ───\\\ \vdots \\\ ───x_m^T ─── \end{bmatrix} \in \mathbb{R}^{m \times n}$$
 
-**4. Compute the Singular-Value-Decomposition (SVD)**
+### 4. Compute the Singular-Value-Decomposition (SVD)
 
 $$X = U \Sigma V^T=U \begin{bmatrix}
 \sigma_1 &             \\
@@ -29,7 +29,7 @@ $$X = U \Sigma V^T=U \begin{bmatrix}
 - $\Sigma \in \mathbb{R}^{m \times m}$ — diagonal matrix with $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_m \geq 0$
 - $V \in \mathbb{R}^{n \times m}$ — columns $v_1, \ldots, v_m$ are the singular vectors (eigenfaces)
 
-**5. Select top-$k$ singular vectors**
+### 5. Select top-$k$ singular vectors
 
 $$V_k = \begin{bmatrix} 
 | & & |\\
@@ -37,14 +37,14 @@ v_1 & \cdots & v_k \\
 | & & |
 \end{bmatrix} \in \mathbb{R}^{n \times k}$$
 
-**6. Dimensionality reduction (projection)**
+###6. Dimensionality reduction (projection)
 
 $$y_i = V_k^T x_i \in \mathbb{R}^k$$
 
-**7. Project the query image in point eigenbasis**
+### 7. Project the query image in point eigenbasis
 
 $$y* = V_k^T x_i \in \mathbb{R}^k$$
 
-**8. Find closest match in original images**
+### 8. Find closest match in original images
 
 $$i = \arg\min_{i \in \{1,\ldots,m\}} \|y^* - y_i\|$$
