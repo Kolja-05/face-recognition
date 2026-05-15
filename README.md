@@ -10,6 +10,6 @@ Recognising faces in images using Python and identifying different persons
 Output: The index $i\in \{1, \dots, m\} of the face image $g$, that best matches $g^*$.
 
 ##1. Calculating Avarage face image:
-\[
+$
 g = \frac{1}{m}\sum-{i=1}^m g_i \in R^n
-\]
+$
