@@ -11,3 +11,32 @@ Output: The index $i\in \{1, \dots, m\} of the face image $g$, that best matches
 
 ## 1. Calculating Avarage face image:
 $$g = \frac{1}{m}\sum_{i=1}^m g_i \in R^n$$
+## 2. Subtract the mean
+$$x_i = g_i.g\in R^n$$
+## 3. Setup Datamatrix
+
+$$X = \begin{pmatrix} --- x_1^T --- \\ \vdots \\ --- x_m^T --- \end{pmatrix} \in \mathbb{R}^{m \times n}$$
+
+**4. Compute the SVD**
+
+$$X = U \Sigma V^T$$
+
+- $U \in \mathbb{R}^{m \times m}$ — orthonormal matrix
+- $\Sigma \in \mathbb{R}^{m \times m}$ — diagonal matrix with $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_m \geq 0$
+- $V \in \mathbb{R}^{n \times m}$ — columns $v_1, \ldots, v_m$ are the singular vectors (eigenfaces)
+
+**5. Select top-$k$ singular vectors**
+
+$$V_k = \begin{pmatrix} v_1 & \cdots & v_k \end{pmatrix} \in \mathbb{R}^{n \times k}$$
+
+**6. Dimensionality reduction (projection)**
+
+$$y_i = V_k^T x_i \in \mathbb{R}^k$$
+
+**7. Project the query point**
+
+$$y^* = V_k^T (g^* - \bar{g}) \in \mathbb{R}^k$$
+
+**8. Nearest neighbour**
+
+$$i = \arg\min_{i \in \{1,\ldots,m\}} \|y^* - y_i\|$$
