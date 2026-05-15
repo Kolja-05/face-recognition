@@ -14,7 +14,8 @@ $$g = \frac{1}{m}\sum_{i=1}^m g_i \in R^n$$
 
 ### 2. Subtract the mean
 $$x_i = g_i.g\in R^n$$
-## 3. Setup Datamatrix
+
+### 3. Setup Datamatrix
 
 $$D = \begin{bmatrix} ───x_1^T ───\\\ \vdots \\\ ───x_m^T ─── \end{bmatrix} \in \mathbb{R}^{m \times n}$$
 
