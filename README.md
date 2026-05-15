@@ -31,7 +31,11 @@ $$X = U \Sigma V^T=U \begin{bmatrix}
 
 **5. Select top-$k$ singular vectors**
 
-$$V_k = \begin{bmatrix} v_1 & \cdots & v_k \end{bmatrix} \in \mathbb{R}^{n \times k}$$
+$$V_k = \begin{bmatrix} 
+\;| & & \;|\\
+v_1 & \cdots & v_k \\
+\;| & & \;|
+\end{bmatrix} \in \mathbb{R}^{n \times k}$$
 
 **6. Dimensionality reduction (projection)**
 
