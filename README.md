@@ -19,7 +19,7 @@ $$D = \begin{bmatrix} ───x_1^T ───\\\ \vdots \\\ ───x_m^T ─�
 
 **4. Compute the Singular-Value-Decomposition (SVD)**
 
-$$X = U \Sigma V^T=U \begin{pmatrix}
+$$X = U \Sigma V^T=U \begin{bmatrix}
 \sigma_1 &             \\
          &         \ddots \\
          &        &        \sigma_m
