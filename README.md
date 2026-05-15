@@ -15,7 +15,7 @@ $$g = \frac{1}{m}\sum_{i=1}^m g_i \in R^n$$
 $$x_i = g_i.g\in R^n$$
 ## 3. Setup Datamatrix
 
-$$X = \begin{pmatrix} \text{---}x_1^T \text{---}\\\ \vdots \\\ x_m^T \end{pmatrix} \in \mathbb{R}^{m \times n}$$
+$$X = \begin{pmatrix} \rule{1.5cm}x_1^T \rule{1.5cm}\\\ \vdots \\\ \rule{1.5cm} x_m^T \rule{1.5cm} \end{pmatrix} \in \mathbb{R}^{m \times n}$$
 
 **4. Compute the SVD**
 
