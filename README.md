@@ -41,10 +41,10 @@ v_1 & \cdots & v_k \\
 
 $$y_i = V_k^T x_i \in \mathbb{R}^k$$
 
-**7. Project the query point**
+**7. Project the query image in point eigenbasis**
 
-$$y_i* = V_k^T x_i \in \mathbb{R}^k$$
+$$y* = V_k^T x_i \in \mathbb{R}^k$$
 
-**8. Nearest neighbour**
+**8. Find closest match in original images**
 
 $$i = \arg\min_{i \in \{1,\ldots,m\}} \|y^* - y_i\|$$
