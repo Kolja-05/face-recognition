@@ -49,4 +49,4 @@ $$y* = V_k^T x_i \in \mathbb{R}^k$$
 
 ### 8. Find closest match in original images
 
-$$i = \arg\min_{i \in \{1,\ldots,m\}} \lVerty^* - y_i\rVert$$
+$$i = \arg\min_{i \in \{1,\ldots,m\}} \lVert y^* - y_i\rVert$$
