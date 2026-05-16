@@ -31,7 +31,7 @@ $$X = U \Sigma V^T=U \begin{bmatrix}
 - $\Sigma \in \mathbb{R}^{m \times m}$ — diagonal matrix with $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_m \geq 0$
 - $V \in \mathbb{R}^{n \times m}$ — columns $v_1, \ldots, v_m$ are the singular vectors (eigenfaces)
 
-### 5. Select top-$k$ singular vectors
+### 5. Select first $k$ singular vectors (Eigenfaces)
 
 $$V_k = \begin{bmatrix} 
 | & & |\\
