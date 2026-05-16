@@ -9,7 +9,7 @@ Recognising faces in images using Python and identifying different persons
 - One $n$-dimensional query-image: Face with width $w$ and height $h$, in grayscale.
 
 Output:
-- The index $i\in \{1, \dots, m\} of the face image $g$, that best matches $g^*$.
+- The index $i\in \{1, \dots, m\}$ of the face image $g$, that best matches $g^*$.
 
 ### 1. Compute the mean face image
 $$g = \frac{1}{m}\sum_{i=1}^m g_i \in R^n$$
