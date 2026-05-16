@@ -93,13 +93,37 @@ def analyse_spectrum(svals: np.ndarray, threshold: float = 0.8) -> int:
         k += 1
     return k
 
+def project_faces(pcs: np.ndarray, images: list[np.ndarray], mean_data: np.ndarray) -> np.ndarray:
+    """
+    Project given image set into basis
+
+    Arguments:
+    pcs: matrix containing principle components / eigenfunctions as row vectors
+    images: list of original images from which pcs were created as np.ndarray
+    mean_data: mean data that was subtracted before computation of SVD/PCA
+
+    Return: 
+    coefficients: basis functions for input images, each row contains coefficients of one image
+    """
+    n = len(images)
+    k = pcs.shape[0]
+    coefficients = np.zeros((n,k))
+    for i, img, in enumerate(images):
+        img = img.flatten() - mean_data
+        coefficients[i] = np.dot(pcs, img)
+    
+    return coefficients
+
+
+
 
 def main():
     train_dir = Path("data/clean")
     print(f"creating eigenfaces directory")
     dst_dir= Path("data/eigenfaces")
     dst_dir.mkdir(parents=True, exist_ok=True)
-
+    all_paths = sorted([p for p in train_dir.iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".png"}])[:4000]
+    np.save(dst_dir / "train_paths.npy", np.array([str(p) for p in all_paths]))
 
     print(f"loading images")
     images = load_images(train_dir)[:4000]
@@ -122,6 +146,9 @@ def main():
     np.save(dst_dir / "pcs.npy", pcs_k)
     np.save(dst_dir / "mean.npy", mean_data)
     np.save(dst_dir / "svals.npy", svals)
+    coeffs_train = project_faces(pcs_k, images, mean_data)
+    np.save(dst_dir / "coeffs_train.npy", coeffs_train)
+    all_paths = sorted([p for p in train_dir.iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".png"}])[:4000]
 
     #save eigenfaces as images
     n, w = images[0].shape

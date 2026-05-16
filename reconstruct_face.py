@@ -1,33 +1,13 @@
-import enum
 from pathlib import Path
-import re
 import numpy as np
 import cv2
+from calculate_eigenfaces import load_images, project_faces
+import random
+import sys
 
 
-def project_faces(pcs: np.ndarray, images: list[np.ndarray], mean_data: np.ndarray) -> np.ndarray:
-    """
-    Project given image set into basis
-
-    Arguments:
-    pcs: matrix containing principle components / eigenfunctions as row vectors
-    images: list of original images from which pcs were created as np.ndarray
-    mean_data: mean data that was subtracted before computation of SVD/PCA
-
-    Return: 
-    coefficients: basis functions for input images, each row contains coefficients of one image
-    """
-    n = len(images)
-    k = pcs.shape[0]
-    coefficients = np.zeros((n,k))
-    for i, img, in enumerate(images):
-        img = img.flatten() - mean_data
-        coefficients[i] = np.dot(pcs, img)
-    
-    return coefficients
-
-
-def identify_faces(coeffs_train: np.ndarray, pcs: np.ndarray, mean_data: np.ndarray, path_test: Path) -> (np.ndarray, list[np.ndarray], np.ndarray):
+def identify_faces(coeffs_train: np.ndarray, pcs: np.ndarray, mean_data: np.ndarray,
+                   path_test: Path=None, imgs_test: list=None) -> (np.ndarray, list[np.ndarray], np.ndarray):
     """
     Perform face recognition for test images assumed to contain faces.
 
@@ -36,7 +16,9 @@ def identify_faces(coeffs_train: np.ndarray, pcs: np.ndarray, mean_data: np.ndar
 
     Arguments:
     coeffs_train: coefficients for training images, each image is represented in a row
-    path_test: path to test image data
+    path_test: path to test image data, can be None
+    imgs_test: list of test images, can be None, but at least one should be not None
+
 
     Return:
     scores: Matrix with correlation between all train and test images, train images in rows, test images in columns
@@ -44,7 +26,10 @@ def identify_faces(coeffs_train: np.ndarray, pcs: np.ndarray, mean_data: np.ndar
     coeffs_test: Eigenface coefficient of test images
     """
 
-    imgs_test = load_images(path_test)[0]
+    if imgs_test is None and path_test is not None:
+        imgs_test = load_images(path_test)
+    elif imgs_test is None:
+        raise ValueError("either path_test or imgs_test should be not None")
 
     coeffs_test = project_faces(pcs, imgs_test, mean_data)
 
@@ -79,40 +64,57 @@ def reconstruct_face(coeffs: np.ndarray, pcs: np.ndarray, mean_data: np.ndarray,
         reconstruction += coeffs[i] * pcs[i]
     return reconstruction
 
-def main():
-    train_dir = Path("data/clean")
-    print(f"loading images")
-    images = load_images(train_dir)
-    h, w = images[0].shape
-    
-    print(f"setting up Data matrix")
-    D = setup_data_matrix(images)
-    
-    print(f"calculating principle components")
-    pcs, svals, mean_data = calculate_pca(D)
-    
-    print(f"analysing spectrum")
-    k = analyse_spectrum(svals, threshold=0.8)
+def run(gallery_coeffs: np.ndarray,
+        pcs: np.ndarray,
+        mean_data: np.ndarray, 
+        gallery_path: Path,
+        test_path: Path
+        ):
+    """
+    Arguments:
+    gallery: coefficients of known faces
+    pcs: princaple components of training data
+    mean_data: mean of training data
+    coeffs_train: coefficients of training data
+    test_path: directory with test images
+    """
+    test_images = [Path(p) for p in np.load(str(test_path))]
+    gallery     = [Path(p) for p in np.load(str(gallery_path))]
+    print("selecting random image")
+    image_path = random.choice(test_images)
 
-    print(f"using k={k} eigenfaces")
-    pcs_k = pcs[:k]
 
-    print("projecting images")
-    coeffs = project_faces(pcs_k, images, mean_data)
+    print(f"selected {image_path.name}")
+    img_test = cv2.imread(str(image_path), cv2.IMREAD_GRAYSCALE)
+    h, w = img_test.shape
+    print("identifying face")
+    scores, imgs_test, coeffs_test = identify_faces(gallery_coeffs, pcs, mean_data, imgs_test=[img_test])
+    best_idx = np.argmin(scores[:,0])
+    print(f"best_idx = {best_idx}")
+    print(f"Closest match: {gallery[best_idx].name} (angle: {np.degrees(scores[best_idx, 0]):.2f}°)")
 
-    idx = np.random.randint(len(images))
-    original = images[idx]
-    coeff = coeffs[idx]
+    print("reconstructing image")
+    k = pcs.shape[0]
+    reconstruction = reconstruct_face(coeffs_test[0], pcs, mean_data, k)
+    reconstruction_img = reconstruction.reshape(h,w)
+    reconstruction_img = cv2.normalize(reconstruction_img, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
 
-    print(f"reconstructing image")
-    reconstruction = reconstruct_face(coeffs, pcs_k, mean_data, k)
-    reconstruction.reshape(h,w)
-
-    cv2.imshow("Original", original.astype(np.uint8))
-    cv2.imshow("Reconstruction", np.clip(reconstruction, 0, 255).astype(np.uint8))
-
-    if (cv2.waitKey(1) & 0xFF == ord('q')):
+    match_img = cv2.imread(str(gallery[best_idx]), cv2.IMREAD_GRAYSCALE)
+    combined = np.hstack([img_test, reconstruction_img, match_img])
+    cv2.imshow("Original | Reconstruction | Closest Match", combined)
+    if (cv2.waitKey(0) & 0xFF == ord('q')):
         cv2.destroyAllWindows()
+    
+
+
+
+
 
 if __name__ == "__main__":
-    main()
+    gallery = np.load("data/eigenfaces/coeffs_gallery.npy")
+    pcs = np.load("data/eigenfaces/pcs.npy")
+    mean_data = np.load("data/eigenfaces/mean.npy")
+    gallery_paths = Path("data/eigenfaces/gallery_paths.npy")
+    test_paths = Path("data/eigenfaces/me_paths.npy")
+    while(True):
+        run(gallery, pcs, mean_data, gallery_paths, test_paths)
