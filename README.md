@@ -1,5 +1,5 @@
 # Face-Recognition
-Recognising faces in images using Python and identifying different persons
+Recognising faces in the webcam with an implementation of the Eigenface algorithm from scratch in Python.
 
 
 ## The Eigenface Algorithm
