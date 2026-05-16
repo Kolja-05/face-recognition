@@ -1,4 +1,5 @@
 venv/
 data/eigenfaces/*.npy
 data/me/
+__pycache__/
 
