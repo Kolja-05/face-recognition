@@ -1,6 +1,6 @@
 # Face-Recognition via Eigenfaces
 
-Real-time face recognition from a webcam, using the [Eigenface-Algorithm](#the eigenface algorithm), implemented from scratch in Python.
+Real-time face recognition from a webcam, using the [Eigenface-Algorithm](#the-eigenface-algorithm), implemented from scratch in Python.
 
 
  # How it works
