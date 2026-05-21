@@ -1,9 +1,9 @@
 # Face-Recognition via Eigenfaces
 
-Real-time face recognition from a webcam, using the [Eigenface-Algorithm](#the-eigenface-algorithm), implemented from scratch in Python.
+Real-time face recognition from a webcam, using the [Eigenface-Algorithm](#the-eigenface-algorithm) implemented from scratch in Python.
 
 
- # How it works
+# How it works
 The system learns a low dimensional space of faces (Eigenspace) from a set of grayscale face images. Each face is represented as vectors of coefficients of the Eigenfaces, which build a basis of the Eigenspace. At recognition time, a query face is projected into the Eigenspace. That projected image is a much more low dimensional vector, which can be used to find a closest match by Euclidean distance.
 
 # Project structure
@@ -17,7 +17,7 @@ face-recognition/
 │
 ├── capture_me.py           # Step 1 - record your own face via webcam
 ├── extract_faces_from_raw_data.py  # Step 2 - extract & normalise training faces
-├── extract_face_from_webcam.py     # Utility - extract a single face from webcam
+├── extract_face_from_webcam.py     # Debug script - extract a single face from webcam
 ├── calculate_eigenfaces.py # Step 3 - run PCA and persist eigenfaces (takes some time)
 ├── project_me_into_eigenspace.py   # Step 4 - project your face into eigenspace
 ├── reconstruct_face.py     # Utility - reconstruct a face from its coefficients
@@ -84,22 +84,6 @@ python identify_me.py
 | `face_recognition` | Face detection (dlib HOG/CNN) |
 | `tqdm` | Progress bars |
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## The Eigenface Algorithm
