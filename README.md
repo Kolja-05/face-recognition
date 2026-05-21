@@ -8,6 +8,7 @@ The system learns a low dimensional space of faces (Eigenspace) from a set of gr
 
 # Project structure
 
+```
 face-recognition/
 ├── data/
 │   ├── clean/              # Raw training face images
@@ -21,6 +22,7 @@ face-recognition/
 ├── project_me_into_eigenspace.py   # Step 4 - project your face into eigenspace
 ├── reconstruct_face.py     # Utility - reconstruct a face from its coefficients
 └── identify_me.py          # Step 5 - live recognition
+```
 
 # Instalation
 
