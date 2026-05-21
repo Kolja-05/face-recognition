@@ -47,7 +47,7 @@ rm lfw.tgz
 
 # How to use
 
-*1. Capture training-set images**
+**1. Capture training-set images**
 ```bash
 mkdir -p data/clean
 python extract_faces_from_raw_data.py
