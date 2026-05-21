@@ -39,13 +39,9 @@ pip install git+https://github.com/ageitgey/face_recognition_models
 
 
 # Get the LFW-Dataset
-```bash
-mkdir -p data/raw
-cd data/raw
-wget http://vis-www.cs.umass.edu/lfw/lfw.tgz
-tar -xvzf lfw.tgz
-rm lfw.tgz
-```
+1. Download the dataset from [kaggle](https://www.kaggle.com/datasets/jessicali9530/lfw-dataset)
+2. Place the images in ´´´bash data/raw´´´
+
 
 # How to use
 
